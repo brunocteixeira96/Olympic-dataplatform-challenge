@@ -190,7 +190,6 @@ Run Ruff:
 
 ```powershell
 python -m ruff check .
-python -m ruff format --check .
 ```
 
 

@@ -2,3 +2,6 @@ pyspark==4.1.2
 pytest
 mypy
 ruff
+jupyter
+ipykernel
+ipython

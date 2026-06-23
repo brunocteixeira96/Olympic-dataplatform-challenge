@@ -1,0 +1,2 @@
+"source_system","source_noc_code","canonical_noc_code","reason"
+"noc_regions","SIN","SGP","Normalize Singapore code to the code used by athlete_events"

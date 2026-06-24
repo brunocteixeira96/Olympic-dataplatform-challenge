@@ -1,0 +1,4 @@
+.venv/
+**/src/olympic_pipeline/__pycache
+.mypy_cache
+.ruff_cache

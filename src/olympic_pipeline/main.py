@@ -50,7 +50,6 @@ def main():
     gold_path = output_path / "gold"
     mapping_file = reference_path / "noc_code_mapping.csv"
 
-    spark = create_spark_session()
 
     try:
         u.log("######################################################")
@@ -261,50 +260,39 @@ def main():
         u.log("******************************************************")
         u.log("***************** Writing Gold layer *****************")
         u.log("******************************************************")
-
+        
         try:
             dim_athlete.write.mode("overwrite").parquet(
                 str(gold_path / "dim_athlete")
             )
             u.log("****** Data successfuly written to dim_athlete! ******")
-        except Exception as error:
-            u.log(f"** Error writing dim_athlete : {error}")
 
-        try:
             dim_games.write.mode("overwrite").parquet(
                 str(gold_path / "dim_games")
             )
             u.log("******** Data successfuly written to dim_games! ******")
-        except Exception as error:
-            u.log(f"** Error writing dim_games : {error}")
 
-        try:
             dim_event.write.mode("overwrite").parquet(
                 str(gold_path / "dim_event")
             )
             u.log("******** Data successfuly written to dim_event! ******")
-        except Exception as error:
-            u.log(f"** Error writing dim_event : {error}")
 
-        try:
             fact_participation.write.mode("overwrite").partitionBy("year").parquet(
                 str(gold_path / "fact_participation")
             )
             u.log("** Data successfuly written to fact_participation! ***")
 
-        except Exception as error:
-            u.log(f"** Error writing fact_participation : {error}")
-
-        try:
             dim_noc.write.mode("overwrite").parquet(
                 str(dim_noc_path)
             )
             dim_noc.unpersist()
             u.log("********** Data successfuly written to dim_noc! ******")
-        except Exception as error:
-            u.log(f"** Error writing dim_noc : {error}")
 
-        u.log("\n")
+        except Exception as error:
+            u.log(f"** Gold layer write failed : {error}")
+            raise
+
+        u.log("******************************************************")
         u.log("******************************************************")
         u.log("********** Pipeline completed successfully************")
         u.log(f"************* for date : {batch_date} ***************")

@@ -154,7 +154,7 @@ The pipeline receives:
 
 1. input directory;
 2. reference-data directory;
-3. output directory;
+3. output directory (is created during the process);
 4. batch date.
 
 Example:
@@ -167,6 +167,14 @@ Run the second batch without deleting the first output:
 
 ```powershell
 python -m olympic_pipeline.main data/test_input/batch_2 data/reference data/test_output 2026-06-21
+```
+
+To delete all the created directories and files stored after the runs use : 
+
+```powershell
+if (Test-Path "data\test_output") {
+    Remove-Item -Recurse -Force "data\test_output"
+}
 ```
 
 Keeping the same output directory allows the pipeline to compare the new NOC data with the existing dimension and create SCD Type 2 versions.
@@ -185,13 +193,6 @@ A successful foreign-key validation confirms that every foreign-key value in `fa
 
 
 ## Code quality
-
-Run Ruff:
-
-```powershell
-python -m ruff check .
-```
-
 
 ```powershell
 python -m mypy src

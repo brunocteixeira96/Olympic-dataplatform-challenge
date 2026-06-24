@@ -105,6 +105,10 @@ Olympic-dataplatform-challenge/
 │       └── gold/
 │   └── test_input/
 │   └── test_output/
+├── docs/
+│   ├── images/
+│   └── Data_platform_challenge.md
+│   └── Data_platform_challenge.pdf
 ├── notebooks/
 ├── src/
 │   └── olympic_pipeline/

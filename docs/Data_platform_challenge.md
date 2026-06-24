@@ -1,8 +1,20 @@
 # Olympic Data Platform — Architecture and Star Schema
-## Data Platform Architecture
+## **Data Platform Architecture**
 ![Data Platform Architecture](images/Data_architecture_diagram.png)
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
-### Architecture Justification
+## **Architecture Justification**
 
 The proposed platform is fully self-hosted and does not depend on any SaaS service.<br>
 Apache Airflow orchestrates batch pipelines, dependencies, retries, scheduling and operational monitoring.<br>
@@ -23,7 +35,10 @@ Apache Atlas provides metadata governance, ownership information and end-to-end 
 Apache Ranger controls data access and auditing, while Kerberos authenticates users and services.<br>
 This architecture is scalable, governed, transactional and supports batch analytics, machine learning and deep learning.<br>
 This architecture is scalable, governed, transactional and capable of supporting batch analytics, machine learning and deep learning.<br>
-## Star Schema
+
+<div class="page"></div>
+
+## **Star Schema**
 
 ```mermaid
 erDiagram
@@ -86,19 +101,20 @@ erDiagram
 ```
 
 
-### Fact-table grain
+### **Fact-table grain**
 
 One row in `fact_participation` represents one athlete participating in one Olympic event, during one Games edition, representing one team and one National Olympic Committee.
 
 The fact table contains foreign keys to the four dimensions and additive measures for participations and athlete medal records.
+<div class="page"></div>
 
-## Slowly Changing Dimension Strategy
+## **Slowly Changing Dimension Strategy**
 
 Slowly Changing Dimension strategies define how changes to descriptive dimension attributes are handled over time.
 
 Business keys and surrogate keys are not normally assigned an SCD type. Business keys identify dimension members, while surrogate keys provide internal identifiers used by the fact table.
 
-### Business keys and surrogate keys
+### *Business keys and surrogate keys*
 
 | Dimension     | Surrogate key | Business key             |
 | ------------- | ------------- | ------------------------ |
@@ -109,7 +125,7 @@ Business keys and surrogate keys are not normally assigned an SCD type. Business
 
 
 
-### SCD Type 1
+### **SCD Type 1**
 
 SCD Type 1 replaces the current value with the latest source value and does not preserve the previous value.
 
@@ -137,7 +153,7 @@ The previous value, `John Smith`, is not retained.
 
 Although the dimension tables are physically overwritten, their business keys are still used to identify the dimension members. A changed business key is generally treated as a different entity rather than as a Type 1 field update.
 
-### SCD Type 2
+### **SCD Type 2**
 
 SCD Type 2 preserves historical changes by expiring the current dimension record and inserting a new version.
 
@@ -182,7 +198,7 @@ Therefore, a change only to `notes` does not currently trigger a new Type 2 vers
 In the current implementation, `notes` should be described as a stored attribute that is not independently tracked for changes.
 
 
-### Summary
+### **Summary**
 
 | Dimension     | Strategy                                                                       |
 | ------------- | ------------------------------------------------------------------------------ |
